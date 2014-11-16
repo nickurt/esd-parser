@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import string, sys, re
+import string, re
 
 class ESDParser:
     def parse(self):
@@ -11,8 +11,8 @@ class ESDParser:
         self.setDelta(int(exploded[1]));
 
         # Set Major & Minor
-        self.setMajor();
-        self.setMinor();
+        self.setMajor(6);
+        self.setMinor(3 if self.build > 9200 and self.build <= 9600 else 4);
     
     def setEsdName(self, esdName):
         self.esdName = esdName
@@ -30,14 +30,11 @@ class ESDParser:
             self.setBranch(self.getEsdName().split('.')[3][:self.getEsdName().split('.')[3].find('CLIENT')-1])
             self.setDateTime(self.getEsdName().split('.')[2])
 
-    def setMajor(self):
-        self.major = 6;
+    def setMajor(self, major):
+        self.major = major;
 
-    def setMinor(self):
-        if self.build > 9200 and self.build <= 9600:
-            self.minor = 3;
-        else:
-            self.minor = 4;
+    def setMinor(self, minor):
+        self.minor = minor
 
     def setBuild(self, build):
         self.build = build
@@ -76,9 +73,3 @@ class ESDParser:
     # Return as a valid buildstring
     def toBuildString(self):
         return '%d.%d.%d.%d.%s.%s' % (self.getMajor(), self.getMinor(), self.getBuild(), self.getDelta(), self.getBranch(), self.getDateTime())
-
-if __name__ == "__main__":
-   esd = ESDParser()
-   esd.setEsdName(sys.argv[1])
-   esd.parse()
-   print esd.toBuildString()
