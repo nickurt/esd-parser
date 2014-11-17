@@ -7,8 +7,8 @@ class ESDParser:
         self.checkEsdPattern()
 
         # Set Build & Delta
-        self.setBuild(int(exploded[0]));
-        self.setDelta(int(exploded[1]));
+        self.setBuild(exploded[0]);
+        self.setDelta(exploded[1]);
 
         # Set Major & Minor
         self.setMajor(6);
@@ -25,28 +25,59 @@ class ESDParser:
             # Matched with build.delta.branch.dateTime (8.x)
             self.setBranch(self.getEsdName().split('.')[2])
             self.setDateTime(self.getEsdName().split('.')[3][:11])
+
+            # Sku, License, Arch, Language
+            skuLicenseArchLang = self.getEsdName().split('.')[3].split('_')
+            self.setSku(skuLicenseArchLang[3])
+            self.setLicense(skuLicenseArchLang[6][6])
+            self.setArchitecture(skuLicenseArchLang[1][:3])
+            self.setCompileState(skuLicenseArchLang[1][3:])
+            self.setLanguage(skuLicenseArchLang[4][:5])
         else:
             # Matched with build.delta.dateTime.branch.* (Threshold Development)
             self.setBranch(self.getEsdName().split('.')[3][:self.getEsdName().split('.')[3].find('CLIENT')-1])
             self.setDateTime(self.getEsdName().split('.')[2])
 
+            # Sku, License, Arch, Language
+            skuLicenseArchLang = self.getEsdName().split('.')[3][self.getEsdName().split('.')[3].find('CLIENT'):].split('_')
+            self.setSku(skuLicenseArchLang[0])
+            self.setLicense(skuLicenseArchLang[1])
+            self.setArchitecture(skuLicenseArchLang[2][:3])
+            self.setCompileState(skuLicenseArchLang[2][3:])
+            self.setLanguage(skuLicenseArchLang[3])
+
     def setMajor(self, major):
-        self.major = major;
+        self.major = int(major);
 
     def setMinor(self, minor):
-        self.minor = minor
+        self.minor = int(minor)
 
     def setBuild(self, build):
-        self.build = build
+        self.build = int(build)
 
     def setDelta(self, delta):
-        self.delta = delta
+        self.delta = int(delta)
 
     def setBranch(self, branch):
         self.branch = branch
 
     def setDateTime(self, dateTime):
         self.dateTime = dateTime
+
+    def setSku(self, sku):
+        self.sku = sku
+
+    def setLicense(self, license):
+        self.license = license
+
+    def setCompileState(self, compileState):
+        self.compileState = compileState
+
+    def setArchitecture(self, architecture):
+        self.architecture = architecture
+
+    def setLanguage(self, language):
+        self.language = language
 
     def getEsdName(self):
         return self.esdName
@@ -68,6 +99,21 @@ class ESDParser:
 
     def getDateTime(self):
         return self.dateTime
+
+    def getSku(self):
+        return self.sku
+
+    def getLicense(self):
+        return self.license
+
+    def getCompileState(self):
+        return self.compileState
+
+    def getArchitecture(self):
+        return self.architecture
+
+    def getLanguage(self):
+        return self.language
 
     # toBuildString
     # Return as a valid buildstring
