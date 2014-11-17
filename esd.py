@@ -115,6 +115,17 @@ class ESDParser:
     def getLanguage(self):
         return self.language
 
+    # toESD
+    # Return as a valid ESD
+    def toESD(self):
+        # 9888.0.141115-2224.fbl_mobs_dev02_CLIENTENTERPRISE_VOL_x86fre_en-us.esd
+        esd = '%d.%d.%s.%s_%s_%s_%s%s_%s.esd' % (self.getBuild(), self.getDelta(), self.getDateTime(), self.getBranch(), self.getSku(), self.getLicense(), self.getArchitecture(), self.getCompileState(), self.getLanguage())
+       
+        #   9778.0.fbl_marketplace.140619-1430_x64fre_client_EnterpriseVL_en-us-IR3_CENA_X64FREV_EN-US_ESD.esd
+        #   esd = '%d.%d.%s.%s_%s%s_%s_%s_%s%s%s_%s_ESD.esd' % (self.getBuild(), self.getDelta(), self.getBranch(), self.getDateTime(), self.getArchitecture(), self.getCompileState(), self.getSku(), self.getLanguage(), self.getArchitecture(), self.getCompileState(), self.getLicense(), self.getLanguage())
+
+        return esd
+
     # toBuildString
     # Return as a valid buildstring
     def toBuildString(self):
