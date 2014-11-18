@@ -16,6 +16,7 @@ class ESDParser:
     
     def setEsdName(self, esdName):
         self.esdName = esdName
+        return self
 
     def checkEsdPattern(self):
         pattern = re.compile("[0-9]{6}-[0-9]{4}")
@@ -28,11 +29,7 @@ class ESDParser:
 
             # Sku, License, Arch, Language
             skuLicenseArchLang = self.getEsdName().split('.')[3].split('_')
-            self.setSku(skuLicenseArchLang[3])
-            self.setLicense(skuLicenseArchLang[6][6])
-            self.setArchitecture(skuLicenseArchLang[1][:3])
-            self.setCompileState(skuLicenseArchLang[1][3:])
-            self.setLanguage(skuLicenseArchLang[4][:5])
+            self.setSku(skuLicenseArchLang[3]).setLicense(skuLicenseArchLang[6][6]).setArchitecture(skuLicenseArchLang[1][:3]).setCompileState(skuLicenseArchLang[1][3:]).setLanguage(skuLicenseArchLang[4][:5])
         else:
             # Matched with build.delta.dateTime.branch.* (Threshold Development)
             self.setBranch(self.getEsdName().split('.')[3][:self.getEsdName().split('.')[3].find('CLIENT')-1])
@@ -40,44 +37,51 @@ class ESDParser:
 
             # Sku, License, Arch, Language
             skuLicenseArchLang = self.getEsdName().split('.')[3][self.getEsdName().split('.')[3].find('CLIENT'):].split('_')
-            self.setSku(skuLicenseArchLang[0])
-            self.setLicense(skuLicenseArchLang[1])
-            self.setArchitecture(skuLicenseArchLang[2][:3])
-            self.setCompileState(skuLicenseArchLang[2][3:])
-            self.setLanguage(skuLicenseArchLang[3])
+            self.setSku(skuLicenseArchLang[0]).setLicense(skuLicenseArchLang[1]).setArchitecture(skuLicenseArchLang[2][:3]).setCompileState(skuLicenseArchLang[2][3:]).setLanguage(skuLicenseArchLang[3])
 
     def setMajor(self, major):
-        self.major = int(major);
+        self.major = int(major)
+        return self
 
     def setMinor(self, minor):
         self.minor = int(minor)
+        return self
 
     def setBuild(self, build):
         self.build = int(build)
+        return self
 
     def setDelta(self, delta):
         self.delta = int(delta)
+        return self
 
     def setBranch(self, branch):
         self.branch = branch
+        return self
 
     def setDateTime(self, dateTime):
         self.dateTime = dateTime
+        return self
 
     def setSku(self, sku):
         self.sku = sku
+        return self
 
     def setLicense(self, license):
         self.license = license
+        return self
 
     def setCompileState(self, compileState):
         self.compileState = compileState
+        return self
 
     def setArchitecture(self, architecture):
         self.architecture = architecture
+        return self
 
     def setLanguage(self, language):
         self.language = language
+        return self
 
     def getEsdName(self):
         return self.esdName
