@@ -12,7 +12,7 @@ class ESDParser:
 
         # Set Major & Minor
         self.setMajor(6 if self.getBuild() in range(9200, 9888) else 10);
-        self.setMinor(3 if self.getBuild() in range(9200, 9601) else 4 if self.getBuild() in range(9783, 9888) else 0);
+        self.setMinor(3 if self.getBuild() in range(9200, 9784) else 4 if self.getBuild() in range(9783, 9888) else 0);
     
     def setEsdName(self, esdName):
         self.esdName = esdName
