@@ -1,6 +1,4 @@
-import random
 import unittest
-
 from esd import ESDParser
 
 class TestESDParserFunctions(unittest.TestCase):
@@ -117,7 +115,6 @@ class TestESDParserFunctions(unittest.TestCase):
 
     def test_Win10Set(self):
         esd = ESDParser()
-        esd.setEsdName('9888.0.141113-2137.fbl_release_CLIENTPRO_RET_x64fre_en-us.esd')
         
         esd.setMajor(10)
         esd.setMinor(0)
