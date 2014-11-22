@@ -83,6 +83,10 @@ class ESDParser:
         self.language = language
         return self
 
+    def setHash(self, hash):
+        self.hash = hash
+        return self
+
     def getEsdName(self):
         return self.esdName
 
@@ -118,6 +122,9 @@ class ESDParser:
 
     def getLanguage(self):
         return self.language
+
+    def getHash(self):
+        return self.hash
 
     # toESD
     # Return as a valid ESD
