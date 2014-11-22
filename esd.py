@@ -133,4 +133,4 @@ class ESDParser:
     # toBuildString
     # Return as a valid buildstring
     def toBuildString(self):
-        return '%d.%d.%d.%d.%s.%s' % (self.getMajor(), self.getMinor(), self.getBuild(), self.getDelta(), self.getBranch(), self.getDateTime())
+        return '%d.%d.%d.%d (%s.%s)' % (self.getMajor(), self.getMinor(), self.getBuild(), self.getDelta(), self.getBranch(), self.getDateTime())
