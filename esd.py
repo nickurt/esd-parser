@@ -11,8 +11,8 @@ class ESDParser:
         self.setDelta(exploded[1]);
 
         # Set Major & Minor
-        self.setMajor(6);
-        self.setMinor(3 if self.build > 9200 and self.build <= 9600 else 4);
+        self.setMajor(6 if self.getBuild() in range(9200, 9888) else 10);
+        self.setMinor(3 if self.getBuild() in range(9200, 9600) else 4 if self.getBuild() in range(9600, 9888) else 0);
     
     def setEsdName(self, esdName):
         self.esdName = esdName
