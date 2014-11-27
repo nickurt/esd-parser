@@ -21,6 +21,25 @@ class TestESDParserFunctions(unittest.TestCase):
         self.assertEqual(esd.getSku(), 'professional')
         self.assertEqual(esd.getLanguage(), 'en-us')
 
+    def test_WinBlueWithHashParse(self):
+        esd = ESDParser()
+        esd.setEsdName('9600.17053.winblue_refresh.140923-1144_x64fre_client_coren_en-us-ir4_ccrna_x64frer_en-us_esd_8808c8e51dd888ec91eca0b2df832e52cc7a22f5.esd')
+        esd.parse()
+        
+        self.assertEqual(esd.toBuildString(), '6.3.9600.17053 (winblue_refresh.140923-1144)')
+        self.assertEqual(esd.getMajor(), 6)
+        self.assertEqual(esd.getMinor(), 3)
+        self.assertEqual(esd.getBuild(), 9600)
+        self.assertEqual(esd.getDelta(), 17053)
+        self.assertEqual(esd.getBranch(), 'winblue_refresh')
+        self.assertEqual(esd.getDateTime(), '140923-1144')
+        self.assertEqual(esd.getLicense(), 'r')
+        self.assertEqual(esd.getArchitecture(), 'x64')
+        self.assertEqual(esd.getCompileState(), 'fre')
+        self.assertEqual(esd.getSku(), 'coren')
+        self.assertEqual(esd.getLanguage(), 'en-us')
+        self.assertEqual(esd.getHash(), '8808c8e51dd888ec91eca0b2df832e52cc7a22f5')
+
     def test_WinThresholdParse(self):
         esd = ESDParser()
         esd.setEsdName('9836.0.140906-2314.fbl_release_CLIENTENTERPRISE_VOL_x64fre_en-us.esd')
@@ -84,6 +103,35 @@ class TestESDParserFunctions(unittest.TestCase):
         self.assertEqual(esd.getCompileState(), 'fre')
         self.assertEqual(esd.getSku(), 'professional')
         self.assertEqual(esd.getLanguage(), 'en-us')
+
+    def test_WinBlueWithHashSet(self):
+        esd = ESDParser()
+        esd.setMajor(6)
+        esd.setMinor(3)
+        esd.setBuild(9600)
+        esd.setDelta(17053)
+        esd.setBranch('winblue_refresh')
+        esd.setDateTime('140923-1144')
+        esd.setLicense('r')
+        esd.setArchitecture('x64')
+        esd.setCompileState('fre')
+        esd.setSku('coren')
+        esd.setLanguage('en-us')
+        esd.setHash('8808c8e51dd888ec91eca0b2df832e52cc7a22f5')
+        
+        self.assertEqual(esd.toBuildString(), '6.3.9600.17053 (winblue_refresh.140923-1144)')
+        self.assertEqual(esd.getMajor(), 6)
+        self.assertEqual(esd.getMinor(), 3)
+        self.assertEqual(esd.getBuild(), 9600)
+        self.assertEqual(esd.getDelta(), 17053)
+        self.assertEqual(esd.getBranch(), 'winblue_refresh')
+        self.assertEqual(esd.getDateTime(), '140923-1144')
+        self.assertEqual(esd.getLicense(), 'r')
+        self.assertEqual(esd.getArchitecture(), 'x64')
+        self.assertEqual(esd.getCompileState(), 'fre')
+        self.assertEqual(esd.getSku(), 'coren')
+        self.assertEqual(esd.getLanguage(), 'en-us')
+        self.assertEqual(esd.getHash(), '8808c8e51dd888ec91eca0b2df832e52cc7a22f5')
 
     def test_WinThresholdSet(self):
         esd = ESDParser()

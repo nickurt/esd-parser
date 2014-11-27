@@ -27,6 +27,12 @@ class ESDParser:
             self.setBranch(self.getEsdName().split('.')[2])
             self.setDateTime(self.getEsdName().split('.')[3][:11])
 
+            # Try to set the hash
+            try:
+                self.setHash(self.getEsdName().split('.')[3].split('_')[9])
+            except IndexError:
+                pass;
+
             # Sku, License, Arch, Language
             skuLicenseArchLang = self.getEsdName().split('.')[3].split('_')
             self.setSku(skuLicenseArchLang[3]).setLicense(skuLicenseArchLang[6][6]).setArchitecture(skuLicenseArchLang[1][:3]).setCompileState(skuLicenseArchLang[1][3:]).setLanguage(skuLicenseArchLang[4][:5])
