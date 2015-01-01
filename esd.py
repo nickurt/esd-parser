@@ -38,11 +38,11 @@ class ESDParser:
             self.setSku(skuLicenseArchLang[3]).setLicense(skuLicenseArchLang[6][6]).setArchitecture(skuLicenseArchLang[1][:3]).setCompileState(skuLicenseArchLang[1][3:]).setLanguage(skuLicenseArchLang[4][:5])
         else:
             # Matched with build.delta.dateTime.branch.* (Threshold Development)
-            self.setBranch(self.getEsdName().split('.')[3][:self.getEsdName().split('.')[3].find('CLIENT')-1])
+            self.setBranch(self.getEsdName().split('.')[3][:self.getEsdName().split('.')[3].lower().find('client')-1])
             self.setDateTime(self.getEsdName().split('.')[2])
 
             # Sku, License, Arch, Language
-            skuLicenseArchLang = self.getEsdName().split('.')[3][self.getEsdName().split('.')[3].find('CLIENT'):].split('_')
+            skuLicenseArchLang = self.getEsdName().split('.')[3][self.getEsdName().split('.')[3].lower().find('client'):].split('_')
             self.setSku(skuLicenseArchLang[0]).setLicense(skuLicenseArchLang[1]).setArchitecture(skuLicenseArchLang[2][:3]).setCompileState(skuLicenseArchLang[2][3:]).setLanguage(skuLicenseArchLang[3])
 
     def setMajor(self, major):

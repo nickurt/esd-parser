@@ -39,6 +39,20 @@ class TestESDParserFunctions(unittest.TestCase):
         self.assertEqual(esd.getSku(), 'coren')
         self.assertEqual(esd.getLanguage(), 'en-us')
         self.assertEqual(esd.getHash(), '8808c8e51dd888ec91eca0b2df832e52cc7a22f5')
+    
+    def test_WinBlueParseWithLowerCaseSKU(self):
+        esd = ESDParser()
+        esd.setEsdName('9600.17053.winblue_refresh.140923-1144_x86fre_client_professional_en-us-ir4_cpra_x86frer_en-us_esd.esd')
+        esd.parse()
+        
+        self.assertEqual(esd.getSku(), 'professional')
+   
+    def test_WinBlueParseWithLowerCaseLicense(self):
+        esd = ESDParser()
+        esd.setEsdName('9600.17053.winblue_refresh.140923-1144_x86fre_client_professional_en-us-ir4_cpra_x86frer_en-us_esd.esd')
+        esd.parse()
+
+        self.assertEqual(esd.getLicense(), 'r')
 
     def test_WinThresholdParse(self):
         esd = ESDParser()
@@ -57,6 +71,20 @@ class TestESDParserFunctions(unittest.TestCase):
         self.assertEqual(esd.getCompileState(), 'fre')
         self.assertEqual(esd.getSku(), 'CLIENTENTERPRISE')
         self.assertEqual(esd.getLanguage(), 'en-us')
+    
+    def test_WinThresholdParseWithLowerCaseSKU(self):
+        esd = ESDParser()
+        esd.setEsdName('9836.0.140906-2314.fbl_release_cliententerprise_VOL_x64fre_en-us.esd')
+        esd.parse()
+        
+        self.assertEqual(esd.getSku(), 'cliententerprise')
+   
+    def test_WinThresholdParseWithLowerCaseLicense(self):
+        esd = ESDParser()
+        esd.setEsdName('9836.0.140906-2314.fbl_release_CLIENTENTERPRISE_vol_x64fre_en-us.esd')
+        esd.parse()
+
+        self.assertEqual(esd.getLicense(), 'vol')
 
     def test_Win10Parse(self):
         esd = ESDParser()
@@ -75,6 +103,20 @@ class TestESDParserFunctions(unittest.TestCase):
         self.assertEqual(esd.getCompileState(), 'fre')
         self.assertEqual(esd.getSku(), 'CLIENTPRO')
         self.assertEqual(esd.getLanguage(), 'en-us')
+
+    def test_Win10ParseWithLowerCaseSKU(self):
+        esd = ESDParser()
+        esd.setEsdName('9888.0.141113-2137.fbl_release_clientpro_RET_x64fre_en-us.esd')
+        esd.parse()
+        
+        self.assertEqual(esd.getSku(), 'clientpro')
+   
+    def test_Win10ParseWithLowerCaseLicense(self):
+        esd = ESDParser()
+        esd.setEsdName('9888.0.141113-2137.fbl_release_CLIENTPRO_ret_x64fre_en-us.esd')
+        esd.parse()
+
+        self.assertEqual(esd.getLicense(), 'ret')
 
     def test_WinBlueSet(self):
         esd = ESDParser()
