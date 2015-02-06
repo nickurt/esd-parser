@@ -118,6 +118,13 @@ class TestESDParserFunctions(unittest.TestCase):
 
         self.assertEqual(esd.getLicense(), 'ret')
 
+    def test_Win10ParseWithHighBuildNumber(self):
+        esd = ESDParser()
+        esd.setEsdName('10000.0.150119-1721.fbl_outlook_CLIENTENTERPRISE_VOL_x64fre_en-us.esd ')
+        esd.parse()
+
+        self.assertEqual(esd.getBuild(), 10000)
+
     def test_WinBlueSet(self):
         esd = ESDParser()
 
